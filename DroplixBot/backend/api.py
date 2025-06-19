@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 import random
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
 CORS(app)  # Разрешает кросс-доступ из WebApp
@@ -20,4 +21,6 @@ def open_case():
     return jsonify({"prize": prize})
 
 if __name__ == "__main__":
-    app.run(port=8000)
+    port = int(os.environ.get("PORT", 8000))
+    app.run(host="0.0.0.0", port=port)
+

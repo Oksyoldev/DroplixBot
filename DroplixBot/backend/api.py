@@ -1,0 +1,23 @@
+from flask import Flask, jsonify
+import random
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)  # Разрешает кросс-доступ из WebApp
+
+# Список призов и шансов
+PRIZES = [
+    {"name": "Мишка 🧸", "chance": 50},
+    {"name": "Telegram Premium 🎁", "chance": 5},
+    {"name": "Пусто 🙁", "chance": 45}
+]
+
+@app.route("/api/open-case", methods=["GET"])
+def open_case():
+    choices = [p["name"] for p in PRIZES]
+    weights = [p["chance"] for p in PRIZES]
+    prize = random.choices(choices, weights=weights, k=1)[0]
+    return jsonify({"prize": prize})
+
+if __name__ == "__main__":
+    app.run(port=8000)

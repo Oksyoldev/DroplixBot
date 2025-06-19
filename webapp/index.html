@@ -9,16 +9,29 @@
 </head>
 <body>
   <div class="container">
+    <img src="https://i.postimg.cc/3xL5hMSJ/20250619-1524-Droplix-Logo-Design-simple-compose-01jy429003e9srnd7yx1qqfdvj.png" alt="Логотип" class="logo" />
     <h1>🎁 DroplixBot</h1>
-    <p>Открой кейс и получи приз!</p>
-
+    <p class="project-description">Открой кейсы и получи ценные призы прямо в Telegram!</p>
+    <div class="balance-page">
+      <div class="balance-display">
+        <span>Баланс:</span>
+        <span class="balance-amount">1000💰</span>
+      </div>
+      <button id="topUpBtn" class="btn-topup">Пополнить баланс</button>
+    </div>
     <!-- Контейнер для кнопок кейсов -->
     <div id="cases"></div>
 
     <!-- Результат открытия кейса -->
     <div id="result" class="result-box"></div>
   </div>
+</body>
+
+<footer class="bottom-nav">
+  <button id="balanceBtn" class="nav-btn active">💰 Баланс</button>
+  <button id="casesBtn" class="nav-btn">🎁 Кейсы</button>
+  <button id="profileBtn" class="nav-btn">👤 Профиль</button>
+</footer>
 
   <script src="app.js"></script>
-</body>
 </html>

@@ -4,14 +4,12 @@ from flask_cors import CORS
 import os
 
 app = Flask(__name__)
-CORS(app)  # Разрешает кросс-доступ из WebApp
+CORS(app, resources={r"/api/*": {"origins": "*"}})  # Включаем CORS для путей /api/*
 
 @app.route("/")
 def home():
     return "DroplixBot API is running"
 
-
-# Список призов и шансов
 PRIZES = [
     {"name": "Мишка 🧸", "chance": 50},
     {"name": "Telegram Premium 🎁", "chance": 5},

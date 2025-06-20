@@ -105,12 +105,16 @@ container.innerHTML = `
   });
 });
 
+const API_URL = "https://droplixbot.onrender.com/api";
+
 async function loadUser() {
-  // Получаем telegram_id и username из Telegram WebApp или заглушку
-  const user = window.Telegram.WebApp.initDataUnsafe?.user || { id: 123456789, username: "username" };
+  const user = window.Telegram.WebApp.initDataUnsafe?.user || {
+    id: 123456789,
+    username: "username"
+  };
 
   try {
-    const response = await fetch("http://localhost:8000/api/user", {
+    const response = await fetch(`${API_URL}/user`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -124,26 +128,29 @@ async function loadUser() {
     const data = await response.json();
     return data; // {telegram_id, username, balance, history}
   } catch (e) {
-    console.error(e);
+    console.error("loadUser error:", e);
     return null;
   }
 }
 
 async function updateBalance(telegram_id, amount) {
   try {
-    const response = await fetch("http://localhost:8000/api/user/balance", {
+    const response = await fetch(`${API_URL}/user/balance`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ telegram_id, amount })
     });
+
     if (!response.ok) throw new Error("Ошибка обновления баланса");
+
     const data = await response.json();
-    return data.balance;
+    return data.balance; // например: 1050
   } catch (e) {
-    console.error(e);
+    console.error("updateBalance error:", e);
     return null;
   }
 }
+
 
 
 // Функция для загрузки кейсов с сервера и создания кнопок

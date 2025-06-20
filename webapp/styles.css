@@ -6,12 +6,18 @@ body {
   color: white;
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
+  align-items: flex-start; /* сдвигаем контент к верху, а не по центру */
+  min-height: 100vh;
+  padding-bottom: 100px; /* добавляем отступ снизу, чтобы не перекрывался нижним меню */
+  box-sizing: border-box;
 }
 
 .container {
   text-align: center;
+  max-width: 400px; /* ограничим ширину для удобства чтения */
+  width: 90%; /* адаптивно под ширину экрана */
+  margin-top: 40px; /* отступ сверху, чтобы не прилипало к верху */
+  margin-bottom: 20px;
 }
 
 button {
@@ -22,6 +28,11 @@ button {
   border-radius: 12px;
   cursor: pointer;
   margin-top: 20px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background: #e6b800;
 }
 
 .result-box {
@@ -45,6 +56,11 @@ button {
   border-radius: 12px;
   cursor: pointer;
   color: black;
+  transition: background-color 0.3s;
+}
+
+#cases button:hover {
+  background: #e6b800;
 }
 
 .bottom-nav {
@@ -52,7 +68,7 @@ button {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 60px;
+  height: 80px;
   background: #222;
   display: flex;
   justify-content: space-around;
@@ -65,11 +81,15 @@ button {
   background: none;
   border: none;
   color: #ccc;
-  font-size: 18px;
-  flex: 1;
-  height: 100%;
+  font-size: 24px; /* чуть больше для удобства */
+  width: 44px;
+  height: 44px;
+  border-radius: 50%; /* чтобы кнопки были круглыми */
   cursor: pointer;
-  transition: color 0.3s;
+  transition: color 0.3s, background 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .nav-btn.active,
@@ -79,39 +99,57 @@ button {
 }
 
 .balance-page {
+  background-color: #222222;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
   text-align: center;
   color: #fff;
+  clip-path: inset(0 round 20px); 
+  box-sizing: border-box;
+  max-width: 400px;
+  margin: 0 auto;
 }
 
 .logo {
-  width: 200px;
-  margin-bottom: 15px;
+  width: 150px; /* чуть меньше, чтобы лучше смотрелось на мобилах */
+  margin-bottom: 30px;
 }
 
-.project-title {
+h1 {
   font-size: 28px;
-  margin: 0 0 10px;
+  margin-top: 0;
 }
 
 .project-description {
   font-size: 16px;
   color: #aaa;
-  margin-bottom: 20px;
+  margin-top: 10px;
   max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .balance-display {
-  font-size: 20px;
-  margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px; /* немного поменьше, чем раньше */
 }
 
 .balance-amount {
   font-weight: 700;
-  margin-left: 8px;
+  font-size: 36px; /* крупнее */
+  color: #ffcc00; /* можно сделать ярче, например */
+  margin-bottom: 4px;
+}
+
+.balance-subtext {
+  font-size: 12px;
+  color: #888888; /* светло-серый */
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .btn-topup {
@@ -127,4 +165,118 @@ button {
 
 .btn-topup:hover {
   background-color: #0056b3;
+}
+
+/* Адаптив для очень маленьких экранов */
+@media (max-width: 360px) {
+  .container, .balance-page {
+    width: 95%;
+    max-width: 100%;
+  }
+  
+  .nav-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 20px;
+  }
+  
+  button, #cases button {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+}
+
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-bottom: -10px;
+  border: 3px solid #ffcc00;
+}
+
+.username {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 40px;
+}
+
+/* Обёртка вокруг кнопок */
+.profile-actions {
+  background: #222;
+  border-radius: 10px;
+  width: 90%;
+  margin: 0 auto 20px;
+  overflow: hidden;
+}
+
+.profile-btn {
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+}
+
+.profile-btn .icon {
+  display: inline-block;
+  width: 22px;
+  min-width: 22px;
+  text-align: center;
+  margin-right: 12px;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.profile-btn .label {
+  display: inline-block;
+  line-height: 1.2;
+}
+
+.divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 0 16px;
+}
+
+
+
+
+
+/* История */
+.section-title {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #ffcc00;
+  text-align: left;
+  width: 90%;
+}
+
+.history-list {
+  width: 90%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.history-list li {
+  background-color: #2a2a2a;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  color: #eee;
 }
